@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <style>
+        /* Import Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Background Styling */
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #32CD32, #228B22); /* Green Gradient */
+            overflow: hidden;
+        }
+
+        /* Animated Background */
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, #32CD32, #2E8B57, #228B22, #006400);
+            background-size: 400% 400%;
+            animation: gradientBG 6s infinite linear;
+            z-index: -1;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Form Container */
+        .container {
+            position: relative;
+            width: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            max-height: 80vh;  /* Limits height */
+            overflow-y: auto;   /* Enables vertical scrolling */
+        }
+
+        /* Custom Scrollbar */
+        .container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        .container::-webkit-scrollbar-thumb {
+            background: #fff;
+            border-radius: 10px;
+        }
+
+        .top {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: BLACK;
+            font-size: 22px;
+            margin: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+            text-align: left;
+            width: 100%;
+            color: BLACK;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            margin-bottom: 12px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            color: rgb(255, 255, 255);
+            outline: none;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid white;
+        }
+        #category option {
+            background-color: #32CD32;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            color: #32CD32;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ddd;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="background"></div>
+
+    <div class="container">
+        <div class="top"><h1>Add a Product</h1></div>
+
+        <form id="addProductForm" enctype="multipart/form-data">
+
+            <!-- Product Name -->
+            <label for="productName">Product Name</label>
+            <input type="text" id="productName" name="productName" placeholder="e.g., Tomatoes" required>
+          
+            <!-- Category -->
+            <label for="category">Category</label>
+            <select id="category" name="category" required>
+                <option value="vegetables">Vegetables</option>
+                <option value="fruits">Fruits</option>
+                <option value="grains">Grains</option>
+                <option value="spices">Spices</option>
+                <option value="herbs">Herbs</option>
+                <option value="nuts">Nuts</option>
+                <option value="oil seeds">Oil Seeds</option>
+            </select>
+          
+            <!-- Quantity -->
+            <label for="quantity">Quantity (kg)</label>
+            <input type="number" id="quantity" name="quantity" placeholder="Enter quantity in kg" min="1" required>
+          
+            <!-- Price -->
+            <label for="price">Price per kg</label>
+            <input type="number" id="price" name="price" placeholder="Enter price in your currency" min="1" required>
+          
+            <!-- Description -->
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="Provide a short description (e.g., organic, fresh)" required></textarea>
+          
+            <!-- Upload Image -->
+            <label for="image">Upload Image</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+          
+            <!-- Submit Button -->
+            <button type="submit">Add Product</button>
+          </form>          
+    </div>
+
+    <script>
+        document.getElementById("addProductForm").addEventListener("submit", function(event) {
+          event.preventDefault(); // Prevent the default form submission
+      
+          // Collect form data
+          const productName = document.getElementById("productName").value;
+          const category = document.getElementById("category").value;
+          const quantity = document.getElementById("quantity").value;
+          const price = document.getElementById("price").value;
+          const description = document.getElementById("description").value;
+          const imageFile = document.getElementById("image").files[0];
+      
+          // Prepare data to send using FormData
+          const formData = new FormData();
+          formData.append("productName", productName);
+          formData.append("category", category);
+          formData.append("quantity", quantity);
+          formData.append("price", price);
+          formData.append("description", description);
+          // For simplicity, if you're sending an image as a file,
+          // your backend would need to handle file uploads (e.g., with multer).
+          // If not, you could convert it to a Base64 string.
+          formData.append("image", imageFile);
+      
+          // Send data to the backend
+          fetch('http://localhost:5000/add-item', {
+            method: 'POST',
+            body: formData,
+          })
+            .then(response => response.json())
+            .then(data => {
+              alert(data.message);
+              // Optionally, clear the form or redirect to the show page:
+              let redirectPage = "";
+        switch (category) {
+            case "vegetables":
+                redirectPage = "veg.html";
+                break;
+            case "fruits":
+                redirectPage = "fruits.html";
+                break;
+            case "grains":
+                redirectPage = "grains.html";
+                break;
+            case "spices":
+                redirectPage = "spices.html";
+                break;
+            case "herbs":
+                redirectPage = "herbs.html";
+                break;
+            case "nuts":
+                redirectPage = "nuts.html";
+                break;
+            case "oil seeds":
+                redirectPage = "oilseeds.html";
+                break;
+            default:
+                redirectPage = "newhome.html"; // Fallback to home or another page
+        }
+
+        window.location.href = redirectPage;  
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              alert('Error adding product');
+            });
+        });
+      </script>      
+
+</body>
+</html>

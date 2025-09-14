@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FarmXchange - Contact Us</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(-45deg, #32CD32, #2E8B57, #228B22, #006400);
+      background-size: 400% 400%;
+      animation: gradientBG 6s infinite linear;
+      color: #fff;
+      padding: 20px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .contact-container {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      max-width: 400px;
+    }
+
+    .contact-container h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #32CD32;
+    }
+
+    .contact-info {
+      margin-bottom: 20px;
+    }
+
+    .contact-info p {
+      margin: 10px 0;
+      font-size: 1.1em;
+    }
+
+    .social-links a {
+      display: inline-block;
+      margin: 10px;
+      text-decoration: none;
+      font-size: 1.2em;
+      color: #fff;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #32CD32;
+    }
+
+    .social-links img {
+      width: 30px;
+      height: 30px;
+      margin-bottom: 5px;
+    }
+
+    .email-link {
+      color: #32CD32;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .email-link:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .back-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #32CD32;
+      border: none;
+      border-radius: 20px;
+      color: #fff;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .back-button:hover {
+      background-color: #228B22;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contact-container">
+    <h1>Contact Us</h1>
+    <div class="contact-info">
+      <p>Mobile: +91 7845301335</p>
+      <p>Email: 
+        <a class="email-link" href="mailto:kamaleshbhanudk2006@gmail.com">kamaleshbhanudk2006@gmail.com</a>
+      </p>
+    </div>
+    
+    <div class="social-links">
+      <a href="https://www.instagram.com/kamalesh45301?igsh=b2syMHR1NHlyeTgy" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram"><br>
+        Instagram
+      </a>
+      <a href="https://www.linkedin.com/in/kamalesh-bhanu-dk-207565294?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384014.png" alt="LinkedIn"><br>
+        LinkedIn
+      </a>
+    </div>
+
+    <!-- Back to Home Button -->
+    <a href="newhome.html" class="back-button">Back to Home</a>
+  </div>
+
+</body>
+</html>

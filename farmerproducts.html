@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmerProducts</title>
+    <style>
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+        }
+
+        /* ✅ Updated Header */
+        header {
+            background-color: #6c9d5b;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+
+        /* ✅ Centered Navigation */
+        .nav-center {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-links {
+            list-style-type: none;
+            display: flex;
+            gap: 40px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        /* ✅ Cart & Farmer Product Icons (Right Side) */
+        .header-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-icons .icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header-icons img {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            border-radius: 50%;
+            margin-bottom: 5px;
+        }
+
+        .header-icons img:hover {
+            opacity: 0.8;
+        }
+
+        .header-icons span {
+            font-size: 1.2em;
+            color: white;
+        }
+
+        footer {
+            background-color: #6c9d5b;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* ✅ Product Grid Layout */
+        #products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .product {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .product img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .product h2 {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #32CD32;
+        }
+
+        .product p {
+            font-size: 1em;
+            margin: 5px 0;
+        }
+
+        /* ✅ Delete Button */
+        .delete-product {
+            background: red;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .delete-product:hover {
+            background: darkred;
+        }
+
+        /* ✅ No Products Message */
+        .no-products {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: red;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <!-- ✅ Empty div to balance header -->
+    <div style="width: 100px;"></div>
+
+    <!-- ✅ Centered Navigation -->
+    <div class="nav-center">
+        <ul class="nav-links">
+            <li><a href="newhome.html">HOME</a></li>
+            <li><a href="additems.html">ADD ITEMS</a></li>
+            <li><a href="#">CONTACT</a></li>
+            <li><a href="fruitsus.html">URGENT STOCK</a></li>
+        </ul>
+    </div>
+
+    <!-- ✅ Cart/Sold Products Icon (Right Side) -->
+    <div class="header-icons">
+        <div class="icon">
+            <a href="cart.html"><img
+              src="https://media.istockphoto.com/id/1206806317/vector/shopping-cart-icon-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=1RRQJs5NDhcB67necQn1WCpJX2YMfWZ4rYi1DFKlkNA="
+              alt="Cart"
+            /></a>
+            <span>Sold<br>Products</span>
+        </div>
+    </div>
+</header>
+
+<!-- ✅ Product Display Section -->
+<div id="products"></div>
+
+<footer>
+    <p>&copy; 2025 FarmXchange. All Rights Reserved.</p>
+</footer>
+
+<script>
+    let allProducts = [];
+
+    // ✅ Fetch and Display Products
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const response = await fetch("http://localhost:5000/products");
+            const products = await response.json();
+            allProducts = products;
+            displayProducts(allProducts);
+        } catch (error) {
+            console.error("❌ Error fetching products:", error);
+            document.getElementById("products").innerHTML = "<p class='no-products'>⚠️ Failed to load products</p>";
+        }
+    });
+
+    // ✅ Function to Display Products
+    function displayProducts(products) {
+        const productsContainer = document.getElementById("products");
+        productsContainer.innerHTML = "";
+
+        if (products.length === 0) {
+            productsContainer.innerHTML = "<p class='no-products'>⚠️ No products found</p>";
+            return;
+        }
+
+        products.forEach(product => {
+            const productElement = document.createElement("div");
+            productElement.classList.add("product");
+            productElement.innerHTML = `
+                <img src="data:image/jpeg;base64,${product.image || ''}" alt="${product.productName || 'No Name'}">
+                <h2>${product.productName || 'No Name'}</h2>
+                <p>Category: ${product.category || 'No Category'}</p>
+                <p>Quantity: ${product.quantity || '0'} kg</p>
+                <p>Price: ₹${product.price || '0'}</p>
+                <p>${product.description || 'No Description'}</p>
+                <button class="delete-product" onclick="confirmDelete('${product._id}', '${product.productName}')">🗑 Delete Product</button>
+            `;
+            productsContainer.appendChild(productElement);
+        });
+    }
+
+    // ✅ Confirm Delete with Alert Box
+    function confirmDelete(productId, productName) {
+        if (confirm(`Are you sure you want to delete "${productName}"? This action cannot be undone.`)) {
+            deleteProduct(productId, productName);
+        }
+    }
+
+    // ✅ Delete Product (Removes from both Products & Cart)
+    function deleteProduct(productId, productName) {
+        fetch(`http://localhost:5000/delete-product/${productId}`, {
+            method: "DELETE",
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            removeProductFromDisplay(productId);
+        })
+        .catch(error => console.error("❌ Error deleting product:", error));
+    }
+
+    // ✅ Remove Deleted Product from UI
+    function removeProductFromDisplay(productId) {
+        allProducts = allProducts.filter(product => product._id !== productId);
+        displayProducts(allProducts);
+    }
+</script>
+
+</body>
+</html>

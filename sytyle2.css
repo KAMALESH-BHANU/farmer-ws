@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../farmer app/images/background1.jpg');
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+h1 {
+    text-align: center;
+}
+
+button {
+    width: 30%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+button:hover {
+    background-color: green;
+}
+d{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0;
+}
+
+.output {
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}

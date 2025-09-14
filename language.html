@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Selector</title>
+    <style>
+        /* Import Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Animated Background */
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #32CD32, #228B22);
+            overflow: hidden;
+        }
+
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, #32CD32, #2E8B57, #228B22, #006400);
+            background-size: 400% 400%;
+            animation: gradientBG 6s infinite linear;
+            z-index: -1;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Form Container */
+        .container {
+            width: 350px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            color: white;
+            font-size: 22px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            color: green;
+            outline: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        select:hover, select:focus {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Display Selected Language */
+        #languageOutput {
+            color: white;
+            font-size: 16px;
+            margin-top: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* ✅ Disabled Button Style */
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            color: #228B22;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .btn:disabled {
+            background: gray;
+            cursor: not-allowed;
+        }
+
+        .btn:hover:not(:disabled) {
+            background: #ddd;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="background"></div>
+
+    <div class="container">
+        <h1>Select Your Language</h1>
+        
+        <select id="languageSelect" onchange="validateSelection()">
+            <option value="">--Select Language--</option>
+            <option value="English">English</option>
+            <option value="Tamil">Tamil</option>
+            <option value="Telugu">Telugu</option>
+            <option value="Marathi">Marathi</option>
+            <option value="Malayalam">Malayalam</option>
+            <option value="Kannada">Kannada</option>
+            <option value="Hindi">Hindi</option>
+        </select>
+
+        <!-- Live Language Display -->
+        <div id="languageOutput"></div>
+
+        <!-- Submit Button (Initially Disabled) -->
+        <button class="btn" id="submitBtn" disabled onclick="redirectToHome()">SUBMIT</button>
+    </div>
+
+    <script>
+        function validateSelection() {
+            const selectedLang = document.getElementById("languageSelect").value;
+            const outputDiv = document.getElementById("languageOutput");
+            const submitBtn = document.getElementById("submitBtn");
+
+            if (selectedLang) {
+                outputDiv.textContent = `You selected: ${selectedLang}`;
+                submitBtn.disabled = false; // Enable button
+            } else {
+                outputDiv.textContent = "";
+                submitBtn.disabled = true; // Disable button
+            }
+        }
+
+        function redirectToHome() {
+            window.location.href = "newhome.html";
+        }
+    </script>
+
+</body>
+</html>
